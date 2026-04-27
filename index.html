@@ -253,6 +253,28 @@ function renderListas() {
 
 // Cargar al inicio
 cargarDatos();
+async function marcarPagado(id) {
+  if (!confirm('¿Marcar como PAGADO?')) return;
+  
+  try {
+    const response = await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({action: 'pagar', id: id})
+    });
+    
+    const result = await response.json();
+    
+    if (result.status === 'ok') {
+      mostrarAlerta('✅ Marcado como pagado');
+      setTimeout(() => location.reload(), 1000);
+    } else {
+      mostrarAlerta('❌ Error: ' + result.msg, true);
+    }
+  } catch (error) {
+    mostrarAlerta('❌ Error de conexión: ' + error.message, true);
+  }
+}
 </script>
 </body>
     </html>
