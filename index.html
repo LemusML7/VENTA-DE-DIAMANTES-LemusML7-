@@ -3,274 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>💎 Control Diamantes FF - Melvin</title>
+    <title>Venta de Diamantes - LemusML7</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{font-family:'Poppins',sans-serif;background:#0f172a;color:#fff;padding:15px}
-       .container{max-width:600px;margin:0 auto}
-        header{background:linear-gradient(135deg,#7c3aed,#a855f7);padding:20px;border-radius:16px;text-align:center;margin-bottom:20px;box-shadow:0 8px 25px rgba(124,58,237,0.3)}
-        h1{font-size:1.8rem;margin-bottom:5px}
-       .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-       .stat{background:#1e293b;padding:15px;border-radius:12px;text-align:center}
-       .stat.num{font-size:1.5rem;font-weight:700;color:#4ade80}
-       .stat.label{font-size:0.8rem;opacity:0.7}
-       .stat.debe.num{color:#f87171}
-       .tabs{display:flex;gap:8px;margin-bottom:15px}
-       .tab{flex:1;padding:12px;border:none;border-radius:10px;font-weight:600;cursor:pointer;background:#1e293b;color:#fff}
-       .tab.active{background:#7c3aed}
-       .card{background:#1e293b;padding:18px;border-radius:16px;margin-bottom:15px}
-       .card h3{margin-bottom:12px;color:#a855f7}
-        input,select{width:100%;padding:12px;border:none;border-radius:10px;background:#334155;color:#fff;margin-bottom:10px;font-size:1rem;font-family:'Poppins'}
-       .btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;background:#7c3aed;color:#fff;transition:0.3s}
-       .btn:hover{background:#6d28d9}
-       .btn:disabled{background:#475569;cursor:not-allowed}
-       .btn-pagar{background:#22c55e}
-       .btn-wsp{background:#25D366}
-       .btn-del{background:#ef4444;padding:8px 12px;font-size:0.85rem}
-       .venta{background:#334155;padding:12px;border-radius:10px;margin-bottom:10px;border-left:4px solid #7c3aed}
-       .venta.fiado{border-left-color:#f87171}
-       .venta.pagado{border-left-color:#22c55e;opacity:0.6}
-       .venta-top{display:flex;justify-content:space-between;margin-bottom:5px}
-       .cliente{font-weight:600;font-size:1.1rem}
-       .fecha{font-size:0.8rem;opacity:0.6}
-       .detalles{font-size:0.9rem;margin:5px 0}
-       .acciones{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-       .acciones-3{grid-template-columns:1fr 1fr auto}
-       .badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:0.75rem;font-weight:700}
-       .badge-fiado{background:#f87171;color:#fff}
-       .badge-pagado{background:#22c55e;color:#fff}
-       .badge-contado{background:#3b82f6;color:#fff}
-       .vacio{text-align:center;padding:30px;opacity:0.5}
-        footer{text-align:center;margin-top:30px;font-size:0.8rem;opacity:0.6}
-       .hidden{display:none}
-       .alerta{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:15px 25px;border-radius:12px;font-weight:600;box-shadow:0 8px 25px rgba(34,197,94,0.4);z-index:999;display:none}
-       .alerta.error{background:#ef4444}
-       .cargando{text-align:center;padding:20px;opacity:0.7}
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; padding: 20px; }
+        .container { max-width: 500px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 20px 60px rgba(0,0,0,0.3); overflow: hidden; }
+        .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; }
+        .header h1 { font-size: 28px; margin-bottom: 5px; }
+        .form-body { padding: 30px; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #333; font-weight: 600; font-size: 14px; }
+        input, select, textarea { width: 100%; padding: 12px; border: 2px solid #e0e0e0; border-radius: 8px; font-size: 15px; transition: all 0.3s; }
+        input:focus, select:focus, textarea:focus { outline: none; border-color: #667eea; }
+        button { width: 100%; padding: 15px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; transition: transform 0.2s; }
+        button:hover { transform: translateY(-2px); }
+        button:active { transform: translateY(0); }
+        .alert { padding: 15px; border-radius: 8px; margin-bottom: 20px; display: none; }
+        .alert.success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert.error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="alerta" id="alerta"></div>
-
-        <header>
-            <h1>💎 Control Diamantes FF</h1>
-            <p style="opacity:0.9">Con Google Sheets ☁️</p>
-        </header>
-
-        <div class="stats">
-            <div class="stat">
-                <div class="num" id="totalVendido">L.0</div>
-                <div class="label">Vendido</div>
-            </div>
-            <div class="stat debe">
-                <div class="num" id="totalFiado">L.0</div>
-                <div class="label">Por Cobrar</div>
-            </div>
-            <div class="stat">
-                <div class="num" id="totalClientes">0</div>
-                <div class="label">Clientes</div>
-            </div>
+        <div class="header">
+            <h1>💎 Venta de Diamantes</h1>
+            <p>LemusML7</p>
         </div>
-
-        <div class="tabs">
-            <button class="tab active" onclick="cambiarTab('nueva')">➕ Nueva Venta</button>
-            <button class="tab" onclick="cambiarTab('lista')">📋 Fiados</button>
-            <button class="tab" onclick="cambiarTab('historial')">✅ Historial</button>
+        <div class="form-body">
+            <div id="alerta" class="alert"></div>
+            <form id="ventaForm">
+                <div class="form-group">
+                    <label>Cliente *</label>
+                    <input type="text" id="cliente" required>
+                </div>
+                <div class="form-group">
+                    <label>Teléfono *</label>
+                    <input type="tel" id="telefono" required>
+                </div>
+                <div class="row">
+                    <div class="form-group">
+                        <label>Diamantes *</label>
+                        <input type="number" id="diamantes" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Precio L. *</label>
+                        <input type="number" id="precio" step="0.01" required>
+                    </div>
+                <div class="form-group">
+                    <label>Tipo *</label>
+                    <select id="tipo" required>
+                        <option value="">Seleccionar...</option>
+                        <option value="ID">ID</option>
+                        <option value="Recarga">Recarga</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Nota</label>
+                    <textarea id="nota" rows="2"></textarea>
+                </div>
+                <div class="form-group">
+                    <label><input type="checkbox" id="pagado" style="width: auto; margin-right: 8px;"> Pagado</label>
+                </div>
+                <button type="submit">Registrar Venta</button>
+            </form>
         </div>
-
-        <!-- NUEVA VENTA -->
-        <div id="nueva">
-            <div class="card">
-                <h3>Registrar Venta</h3>
-                <input type="text" id="cliente" placeholder="Nombre o ID Free Fire">
-                <input type="tel" id="telefono" placeholder="WhatsApp del cliente (opcional)">
-                <input type="number" id="diamantes" placeholder="Cantidad diamantes">
-                <input type="number" id="precio" placeholder="Precio total L.">
-                <select id="tipo">
-                    <option value="contado">Contado - Pagó ya</option>
-                    <option value="fiado">Fiado - Paga después</option>
-                </select>
-                <input type="text" id="nota" placeholder="Nota: fecha pago, etc...">
-                <button class="btn" id="btnGuardar" onclick="agregarVenta()">💾 Guardar Venta</button>
-            </div>
-        </div>
-
-        <!-- LISTA FIADOS -->
-        <div id="lista" class="hidden">
-            <div id="listaFiados"><div class="cargando">Cargando...</div></div>
-        </div>
-
-        <!-- HISTORIAL -->
-        <div id="historial" class="hidden">
-            <div id="listaHistorial"><div class="cargando">Cargando...</div></div>
-        </div>
-
-        <footer>Sistema Melvin Lemus • Sincronizado con Google Sheets</footer>
     </div>
 
-<script>
-113 // ⚠️ PEGA AQUÍ EL ID DE TU GOOGLE SHEET
-114 const SHEET_ID = '1Gz9HdySJREsnp1aK-SmPqCB55xEZSCW7uhsJYqNv3VY';
-115 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Hoja1`;
-116 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyMyRVVzEFgB_tk28G0hmW25EhXv1adLqWhooGYGy0_9fBqgUVbxhCZy_Bx203-hmao/exec';
-let ventas = [];
+    <script>
+        const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLfNGk9ZHDinCKDlMwO6rSDKEEgk3QCL9ioR-uS8fpg1VhlW-yv4V52CmEz6-krrgO/exec';
+        
+        document.getElementById('ventaForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const now = new Date();
+            const venta = {
+                id: Date.now(),
+                cliente: document.getElementById('cliente').value,
+                telefono: document.getElementById('telefono').value,
+                diamantes: parseInt(document.getElementById('diamantes').value),
+                precio: parseFloat(document.getElementById('precio').value),
+                tipo: document.getElementById('tipo').value,
+                nota: document.getElementById('nota').value,
+                fecha: now.toLocaleDateString('es-HN'),
+                hora: now.toLocaleTimeString('es-HN'),
+                pagado: document.getElementById('pagado').checked,
+                fechaPago: document.getElementById('pagado').checked ? now.toLocaleDateString('es-HN') : ''
+            };
 
-function mostrarAlerta(msg, error = false) {
-    const alerta = document.getElementById('alerta');
-    alerta.textContent = msg;
-    alerta.className = error? 'alerta error' : 'alerta';
-    alerta.style.display = 'block';
-    setTimeout(() => alerta.style.display = 'none', 2500);
-}
+            fetch(APPS_SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                body: JSON.stringify(venta)
+            });
+            
+            mostrarAlerta('✅ Venta registrada exitosamente', 'success');
+            document.getElementById('ventaForm').reset();
+        });
 
-function cambiarTab(tab) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    event.target.classList.add('active');
-    document.getElementById('nueva').classList.add('hidden');
-    document.getElementById('lista').classList.add('hidden');
-    document.getElementById('historial').classList.add('hidden');
-    document.getElementById(tab).classList.remove('hidden');
-    if(tab!== 'nueva') cargarDatos();
-}
-
-async function cargarDatos() {
-    try {
-        const res = await fetch(SHEET_URL);
-        const text = await res.text();
-        const json = JSON.parse(text.substr(47).slice(0, -2));
-        const rows = json.table.rows;
-
-        ventas = rows.slice(1).map(r => ({
-            id: r.c[0]?.v || Date.now(),
-            cliente: r.c[1]?.v || '',
-            telefono: r.c[2]?.v || '',
-            diamantes: r.c[3]?.v || 0,
-            precio: r.c[4]?.v || 0,
-            tipo: r.c[5]?.v || 'contado',
-            nota: r.c[6]?.v || '',
-            fecha: r.c[7]?.v || '',
-            hora: r.c[8]?.v || '',
-            pagado: r.c[9]?.v === true || r.c[9]?.v === 'TRUE',
-            fechaPago: r.c[10]?.v || ''
-        })).reverse();
-
-        actualizarStats();
-        renderListas();
-    } catch(e) {
-        mostrarAlerta('⚠️ Error cargando datos. Revisa el ID de Sheet', true);
-    }
-}
-
-async function agregarVenta() {
-    const cliente = document.getElementById('cliente').value;
-    const telefono = document.getElementById('telefono').value;
-    const diamantes = parseInt(document.getElementById('diamantes').value);
-    const precio = parseFloat(document.getElementById('precio').value);
-    const tipo = document.getElementById('tipo').value;
-    const nota = document.getElementById('nota').value;
-
-    if (!cliente || !diamantes || !precio) {
-        mostrarAlerta('⚠️ Llena cliente, diamantes y precio', true);
-        return;
-    }
-
-    const btn = document.getElementById('btnGuardar');
-    btn.disabled = true;
-    btn.textContent = 'Guardando...';
-
-    const venta = {
-        id: Date.now(),
-        cliente: cliente,
-        telefono: telefono,
-        diamantes: diamantes,
-        precio: precio,
-        tipo: tipo,
-        nota: nota,
-        fecha: new Date().toLocaleDateString('es-HN'),
-        hora: new Date().toLocaleTimeString('es-HN'),
-        pagado: tipo === 'Contado',
-        fechaPago: tipo === 'Contado' ? new Date().toLocaleDateString('es-HN') : ''
-    };
-
-    ventas.unshift(venta);
-    
-    fetch(APPS_SCRIPT_URL, {
-    method: 'POST',
-    mode: 'no-cors',
-    body: JSON.stringify(venta)
-});
-mostrarAlerta('✅ Enviado a Google Sheets');
-
-    guardar();
-    document.getElementById('cliente').value = '';
-    document.getElementById('telefono').value = '';
-    document.getElementById('diamantes').value = '';
-    document.getElementById('precio').value = '';
-    document.getElementById('nota').value = '';
-    btn.disabled = false;
-    btn.textContent = 'Guardar Venta';
-}
-}
-
-function marcarPagado(id) {
-    mostrarAlerta('⚠️ Para marcar pagado, edita directo en Google Sheets por ahora', true);
-}
-
-function cobrarWhatsApp(telefono, cliente, diamantes, precio, fecha) {
-    if (!telefono) {
-        telefono = prompt('Ingresa el WhatsApp del cliente (ej: 98765432):');
-        if (!telefono) return;
-    }
-    const mensaje = `Hola ${cliente} 👋%0A%0ASoy Melvin de Diamantes FF 💎%0A%0ATe recuerdo que tienes pendiente:%0A%0A💎 ${diamantes} diamantes%0A💰 Total: L.${precio}%0A📅 Desde: ${fecha}%0A%0A¿Para cuándo me puedes cancelar?%0A%0AGracias bro 🙏`;
-    window.open(`https://wa.me/504${telefono}?text=${mensaje}`, '_blank');
-}
-
-function actualizarStats() {
-    const totalVendido = ventas.reduce((s, v) => s + v.precio, 0);
-    const totalFiado = ventas.filter(v =>!v.pagado).reduce((s, v) => s + v.precio, 0);
-    const clientes = [...new Set(ventas.map(v => v.cliente))].length;
-
-    document.getElementById('totalVendido').textContent = `L.${totalVendido.toFixed(0)}`;
-    document.getElementById('totalFiado').textContent = `L.${totalFiado.toFixed(0)}`;
-    document.getElementById('totalClientes').textContent = clientes;
-}
-
-function renderListas() {
-    const fiados = ventas.filter(v =>!v.pagado);
-    const historial = ventas.filter(v => v.pagado);
-
-    document.getElementById('listaFiados').innerHTML = fiados.length? fiados.map(v => `
-        <div class="venta fiado">
-            <div class="venta-top">
-                <div class="cliente">${v.cliente}</div>
-                <span class="badge badge-fiado">FIADO</span>
-            </div>
-            <div class="fecha">${v.fecha} ${v.hora}</div>
-            <div class="detalles">💎 ${v.diamantes} diamantes = <strong>L.${v.precio}</strong></div>
-            ${v.telefono? `<div class="detalles" style="opacity:0.7">📱 ${v.telefono}</div>` : ''}
-            ${v.nota? `<div class="detalles" style="opacity:0.7">📝 ${v.nota}</div>` : ''}
-            <div class="acciones">
-                <button class="btn btn-wsp" onclick="cobrarWhatsApp('${v.telefono || ''}', '${v.cliente}', ${v.diamantes}, ${v.precio}, '${v.fecha}')">💬 Cobrar</button>
-                <button class="btn btn-pagar" onclick="mostrarAlerta('Edita pagado=TRUE en tu Sheet')">✅ Pagó</button>
-            </div>
-        </div>
-    `).join('') : '<div class="vacio">No hay fiados pendientes 🎉</div>';
-
-    document.getElementById('listaHistorial').innerHTML = historial.length? historial.map(v => `
-        <div class="venta pagado">
-            <div class="venta-top">
-                <div class="cliente">${v.cliente}</div>
-                <span class="badge ${v.tipo === 'contado'? 'badge-contado' : 'badge-pagado'}">${v.tipo === 'contado'? 'CONTADO' : 'PAGADO'}</span>
-            </div>
-            <div class="fecha">Venta: ${v.fecha} • Pago: ${v.fechaPago}</div>
-            <div class="detalles">💎 ${v.diamantes} diamantes = <strong>L.${v.precio}</strong></div>
-        </div>
-    `).join('') : '<div class="vacio">Aún no hay ventas completadas</div>';
-}
-
-// Cargar al inicio
-cargarDatos();
-</script>
+        function mostrarAlerta(msg, tipo) {
+            const alerta = document.getElementById('alerta');
+            alerta.textContent = msg;
+            alerta.className = 'alert ' + tipo;
+            alerta.style.display = 'block';
+            setTimeout(() => { alerta.style.display = 'none'; }, 3000);
+        }
+    </script>
 </body>
-</html>
+            </html>
