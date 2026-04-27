@@ -8,51 +8,54 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Poppins',sans-serif;background:#0f172a;color:#fff;padding:15px}
-        .container{max-width:600px;margin:0 auto}
+       .container{max-width:600px;margin:0 auto}
         header{background:linear-gradient(135deg,#7c3aed,#a855f7);padding:20px;border-radius:16px;text-align:center;margin-bottom:20px;box-shadow:0 8px 25px rgba(124,58,237,0.3)}
         h1{font-size:1.8rem;margin-bottom:5px}
-        .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
-        .stat{background:#1e293b;padding:15px;border-radius:12px;text-align:center}
-        .stat .num{font-size:1.5rem;font-weight:700;color:#4ade80}
-        .stat .label{font-size:0.8rem;opacity:0.7}
-        .stat.debe .num{color:#f87171}
-        .tabs{display:flex;gap:8px;margin-bottom:15px}
-        .tab{flex:1;padding:12px;border:none;border-radius:10px;font-weight:600;cursor:pointer;background:#1e293b;color:#fff}
-        .tab.active{background:#7c3aed}
-        .card{background:#1e293b;padding:18px;border-radius:16px;margin-bottom:15px}
-        .card h3{margin-bottom:12px;color:#a855f7}
+       .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+       .stat{background:#1e293b;padding:15px;border-radius:12px;text-align:center}
+       .stat.num{font-size:1.5rem;font-weight:700;color:#4ade80}
+       .stat.label{font-size:0.8rem;opacity:0.7}
+       .stat.debe.num{color:#f87171}
+       .tabs{display:flex;gap:8px;margin-bottom:15px}
+       .tab{flex:1;padding:12px;border:none;border-radius:10px;font-weight:600;cursor:pointer;background:#1e293b;color:#fff}
+       .tab.active{background:#7c3aed}
+       .card{background:#1e293b;padding:18px;border-radius:16px;margin-bottom:15px}
+       .card h3{margin-bottom:12px;color:#a855f7}
         input,select{width:100%;padding:12px;border:none;border-radius:10px;background:#334155;color:#fff;margin-bottom:10px;font-size:1rem;font-family:'Poppins'}
-        .btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;background:#7c3aed;color:#fff;transition:0.3s}
-        .btn:hover{background:#6d28d9}
-        .btn-pagar{background:#22c55e}
-        .btn-wsp{background:#25D366}
-        .btn-del{background:#ef4444;padding:8px 12px;font-size:0.85rem}
-        .venta{background:#334155;padding:12px;border-radius:10px;margin-bottom:10px;border-left:4px solid #7c3aed}
-        .venta.fiado{border-left-color:#f87171}
-        .venta.pagado{border-left-color:#22c55e;opacity:0.6}
-        .venta-top{display:flex;justify-content:space-between;margin-bottom:5px}
-        .cliente{font-weight:600;font-size:1.1rem}
-        .fecha{font-size:0.8rem;opacity:0.6}
-        .detalles{font-size:0.9rem;margin:5px 0}
-        .acciones{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-        .acciones-3{grid-template-columns:1fr 1fr auto}
-        .badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:0.75rem;font-weight:700}
-        .badge-fiado{background:#f87171;color:#fff}
-        .badge-pagado{background:#22c55e;color:#fff}
-        .badge-contado{background:#3b82f6;color:#fff}
-        .vacio{text-align:center;padding:30px;opacity:0.5}
+       .btn{width:100%;padding:14px;border:none;border-radius:10px;font-weight:700;font-size:1rem;cursor:pointer;background:#7c3aed;color:#fff;transition:0.3s}
+       .btn:hover{background:#6d28d9}
+       .btn:disabled{background:#475569;cursor:not-allowed}
+       .btn-pagar{background:#22c55e}
+       .btn-wsp{background:#25D366}
+       .btn-del{background:#ef4444;padding:8px 12px;font-size:0.85rem}
+       .venta{background:#334155;padding:12px;border-radius:10px;margin-bottom:10px;border-left:4px solid #7c3aed}
+       .venta.fiado{border-left-color:#f87171}
+       .venta.pagado{border-left-color:#22c55e;opacity:0.6}
+       .venta-top{display:flex;justify-content:space-between;margin-bottom:5px}
+       .cliente{font-weight:600;font-size:1.1rem}
+       .fecha{font-size:0.8rem;opacity:0.6}
+       .detalles{font-size:0.9rem;margin:5px 0}
+       .acciones{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+       .acciones-3{grid-template-columns:1fr 1fr auto}
+       .badge{display:inline-block;padding:3px 8px;border-radius:6px;font-size:0.75rem;font-weight:700}
+       .badge-fiado{background:#f87171;color:#fff}
+       .badge-pagado{background:#22c55e;color:#fff}
+       .badge-contado{background:#3b82f6;color:#fff}
+       .vacio{text-align:center;padding:30px;opacity:0.5}
         footer{text-align:center;margin-top:30px;font-size:0.8rem;opacity:0.6}
-        .hidden{display:none}
-        .alerta{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:15px 25px;border-radius:12px;font-weight:600;box-shadow:0 8px 25px rgba(34,197,94,0.4);z-index:999;display:none}
+       .hidden{display:none}
+       .alerta{position:fixed;top:20px;left:50%;transform:translateX(-50%);background:#22c55e;color:#fff;padding:15px 25px;border-radius:12px;font-weight:600;box-shadow:0 8px 25px rgba(34,197,94,0.4);z-index:999;display:none}
+       .alerta.error{background:#ef4444}
+       .cargando{text-align:center;padding:20px;opacity:0.7}
     </style>
 </head>
 <body>
     <div class="container">
         <div class="alerta" id="alerta"></div>
-        
+
         <header>
             <h1>💎 Control Diamantes FF</h1>
-            <p style="opacity:0.9">Ventas y Fiados - Trujillo</p>
+            <p style="opacity:0.9">Con Google Sheets ☁️</p>
         </header>
 
         <div class="stats">
@@ -89,37 +92,37 @@
                     <option value="fiado">Fiado - Paga después</option>
                 </select>
                 <input type="text" id="nota" placeholder="Nota: fecha pago, etc...">
-                <button class="btn" onclick="agregarVenta()">💾 Guardar Venta</button>
+                <button class="btn" id="btnGuardar" onclick="agregarVenta()">💾 Guardar Venta</button>
             </div>
         </div>
 
         <!-- LISTA FIADOS -->
         <div id="lista" class="hidden">
-            <div id="listaFiados"></div>
+            <div id="listaFiados"><div class="cargando">Cargando...</div></div>
         </div>
 
         <!-- HISTORIAL -->
         <div id="historial" class="hidden">
-            <div id="listaHistorial"></div>
+            <div id="listaHistorial"><div class="cargando">Cargando...</div></div>
         </div>
 
-        <footer>Sistema Melvin Lemus • Todo se guarda en tu celular</footer>
+        <footer>Sistema Melvin Lemus • Sincronizado con Google Sheets</footer>
     </div>
 
 <script>
-let ventas = JSON.parse(localStorage.getItem('ventasFF') || '[]');
+113 // ⚠️ PEGA AQUÍ EL ID DE TU GOOGLE SHEET
+114 const SHEET_ID = '1Gz9HdySJREsnp1aK-SmPqCB55xEZSCW7uhsJYqNv3VY';
+115 const SHEET_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:csv&sheet=Hoja1`;
+116 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxOc8uU_bKhsDa1iMCqXDVOKKFumQWGmcF0tOo63OaJ-uPm-wtXt10myfzDFlX6sMV8gQ/exec';
 
-function mostrarAlerta(msg) {
+let ventas = [];
+
+function mostrarAlerta(msg, error = false) {
     const alerta = document.getElementById('alerta');
     alerta.textContent = msg;
+    alerta.className = error? 'alerta error' : 'alerta';
     alerta.style.display = 'block';
     setTimeout(() => alerta.style.display = 'none', 2500);
-}
-
-function guardar() {
-    localStorage.setItem('ventasFF', JSON.stringify(ventas));
-    actualizarStats();
-    renderListas();
 }
 
 function cambiarTab(tab) {
@@ -129,89 +132,113 @@ function cambiarTab(tab) {
     document.getElementById('lista').classList.add('hidden');
     document.getElementById('historial').classList.add('hidden');
     document.getElementById(tab).classList.remove('hidden');
+    if(tab!== 'nueva') cargarDatos();
 }
 
-function agregarVenta() {
+async function cargarDatos() {
+    try {
+        const res = await fetch(SHEET_URL);
+        const text = await res.text();
+        const json = JSON.parse(text.substr(47).slice(0, -2));
+        const rows = json.table.rows;
+
+        ventas = rows.slice(1).map(r => ({
+            id: r.c[0]?.v || Date.now(),
+            cliente: r.c[1]?.v || '',
+            telefono: r.c[2]?.v || '',
+            diamantes: r.c[3]?.v || 0,
+            precio: r.c[4]?.v || 0,
+            tipo: r.c[5]?.v || 'contado',
+            nota: r.c[6]?.v || '',
+            fecha: r.c[7]?.v || '',
+            hora: r.c[8]?.v || '',
+            pagado: r.c[9]?.v === true || r.c[9]?.v === 'TRUE',
+            fechaPago: r.c[10]?.v || ''
+        })).reverse();
+
+        actualizarStats();
+        renderListas();
+    } catch(e) {
+        mostrarAlerta('⚠️ Error cargando datos. Revisa el ID de Sheet', true);
+    }
+}
+
+async function agregarVenta() {
     const cliente = document.getElementById('cliente').value.trim();
     const telefono = document.getElementById('telefono').value.trim();
     const diamantes = parseInt(document.getElementById('diamantes').value);
     const precio = parseFloat(document.getElementById('precio').value);
     const tipo = document.getElementById('tipo').value;
     const nota = document.getElementById('nota').value.trim();
-    
-    if (!cliente || !diamantes || !precio) {
-        mostrarAlerta('⚠️ Llena cliente, diamantes y precio');
+
+    if (!cliente ||!diamantes ||!precio) {
+        mostrarAlerta('⚠️ Llena cliente, diamantes y precio', true);
         return;
     }
-    
-    ventas.unshift({
-        id: Date.now(),
-        cliente, telefono, diamantes, precio, tipo, nota,
-        fecha: new Date().toLocaleDateString('es-HN'),
-        hora: new Date().toLocaleTimeString('es-HN', {hour:'2-digit',minute:'2-digit'}),
-        pagado: tipo === 'contado',
-        fechaPago: tipo === 'contado' ? new Date().toLocaleDateString('es-HN') : null
-    });
-    
-    document.getElementById('cliente').value = '';
-    document.getElementById('telefono').value = '';
-    document.getElementById('diamantes').value = '';
-    document.getElementById('precio').value = '';
-    document.getElementById('nota').value = '';
-    
-    guardar();
-    mostrarAlerta(tipo === 'fiado' ? '💰 Fiado registrado' : '✅ Venta guardada');
+
+    const btn = document.getElementById('btnGuardar');
+    btn.disabled = true;
+    btn.textContent = 'Guardando...';
+
+    const fecha = new Date().toLocaleDateString('es-HN');
+    const hora = new Date().toLocaleTimeString('es-HN', {hour:'2-digit',minute:'2-digit'});
+    const id = Date.now();
+
+    // Usando Google Apps Script Web App - más fácil
+    const url = `https://script.google.com/macros/s/AKfycby3-PEGA-TU-DEPLOY-ID/exec`;
+
+    try {
+        await fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({id,cliente,telefono,diamantes,precio,tipo,nota,fecha,hora,pagado:tipo==='contado',fechaPago:tipo==='contado'?fecha:''})
+        });
+
+        document.getElementById('cliente').value = '';
+        document.getElementById('telefono').value = '';
+        document.getElementById('diamantes').value = '';
+        document.getElementById('precio').value = '';
+        document.getElementById('nota').value = '';
+
+        mostrarAlerta('✅ Guardado en Google Sheets');
+        setTimeout(cargarDatos, 1000);
+    } catch(e) {
+        mostrarAlerta('⚠️ Error al guardar', true);
+    }
+
+    btn.disabled = false;
+    btn.textContent = '💾 Guardar Venta';
 }
 
 function marcarPagado(id) {
-    const venta = ventas.find(v => v.id === id);
-    if (venta && confirm(`¿${venta.cliente} ya pagó L.${venta.precio}?`)) {
-        venta.pagado = true;
-        venta.fechaPago = new Date().toLocaleDateString('es-HN');
-        guardar();
-        mostrarAlerta('✅ Pago registrado');
-    }
+    mostrarAlerta('⚠️ Para marcar pagado, edita directo en Google Sheets por ahora', true);
 }
 
 function cobrarWhatsApp(telefono, cliente, diamantes, precio, fecha) {
     if (!telefono) {
-        const tel = prompt('Ingresa el WhatsApp del cliente (ej: 98765432):');
-        if (!tel) return;
-        const venta = ventas.find(v => v.cliente === cliente && v.precio === precio);
-        if (venta) {
-            venta.telefono = tel;
-            guardar();
-        }
-        telefono = tel;
+        telefono = prompt('Ingresa el WhatsApp del cliente (ej: 98765432):');
+        if (!telefono) return;
     }
-    
     const mensaje = `Hola ${cliente} 👋%0A%0ASoy Melvin de Diamantes FF 💎%0A%0ATe recuerdo que tienes pendiente:%0A%0A💎 ${diamantes} diamantes%0A💰 Total: L.${precio}%0A📅 Desde: ${fecha}%0A%0A¿Para cuándo me puedes cancelar?%0A%0AGracias bro 🙏`;
     window.open(`https://wa.me/504${telefono}?text=${mensaje}`, '_blank');
 }
 
-function eliminarVenta(id) {
-    if (confirm('¿Eliminar este registro?')) {
-        ventas = ventas.filter(v => v.id !== id);
-        guardar();
-        mostrarAlerta('🗑️ Eliminado');
-    }
-}
-
 function actualizarStats() {
     const totalVendido = ventas.reduce((s, v) => s + v.precio, 0);
-    const totalFiado = ventas.filter(v => !v.pagado).reduce((s, v) => s + v.precio, 0);
+    const totalFiado = ventas.filter(v =>!v.pagado).reduce((s, v) => s + v.precio, 0);
     const clientes = [...new Set(ventas.map(v => v.cliente))].length;
-    
+
     document.getElementById('totalVendido').textContent = `L.${totalVendido.toFixed(0)}`;
     document.getElementById('totalFiado').textContent = `L.${totalFiado.toFixed(0)}`;
     document.getElementById('totalClientes').textContent = clientes;
 }
 
 function renderListas() {
-    const fiados = ventas.filter(v => !v.pagado);
+    const fiados = ventas.filter(v =>!v.pagado);
     const historial = ventas.filter(v => v.pagado);
-    
-    document.getElementById('listaFiados').innerHTML = fiados.length ? fiados.map(v => `
+
+    document.getElementById('listaFiados').innerHTML = fiados.length? fiados.map(v => `
         <div class="venta fiado">
             <div class="venta-top">
                 <div class="cliente">${v.cliente}</div>
@@ -219,34 +246,29 @@ function renderListas() {
             </div>
             <div class="fecha">${v.fecha} ${v.hora}</div>
             <div class="detalles">💎 ${v.diamantes} diamantes = <strong>L.${v.precio}</strong></div>
-            ${v.telefono ? `<div class="detalles" style="opacity:0.7">📱 ${v.telefono}</div>` : ''}
-            ${v.nota ? `<div class="detalles" style="opacity:0.7">📝 ${v.nota}</div>` : ''}
-            <div class="acciones acciones-3">
+            ${v.telefono? `<div class="detalles" style="opacity:0.7">📱 ${v.telefono}</div>` : ''}
+            ${v.nota? `<div class="detalles" style="opacity:0.7">📝 ${v.nota}</div>` : ''}
+            <div class="acciones">
                 <button class="btn btn-wsp" onclick="cobrarWhatsApp('${v.telefono || ''}', '${v.cliente}', ${v.diamantes}, ${v.precio}, '${v.fecha}')">💬 Cobrar</button>
-                <button class="btn btn-pagar" onclick="marcarPagado(${v.id})">✅ Pagó</button>
-                <button class="btn btn-del" onclick="eliminarVenta(${v.id})">🗑️</button>
+                <button class="btn btn-pagar" onclick="mostrarAlerta('Edita pagado=TRUE en tu Sheet')">✅ Pagó</button>
             </div>
         </div>
     `).join('') : '<div class="vacio">No hay fiados pendientes 🎉</div>';
-    
-    document.getElementById('listaHistorial').innerHTML = historial.length ? historial.map(v => `
+
+    document.getElementById('listaHistorial').innerHTML = historial.length? historial.map(v => `
         <div class="venta pagado">
             <div class="venta-top">
                 <div class="cliente">${v.cliente}</div>
-                <span class="badge ${v.tipo === 'contado' ? 'badge-contado' : 'badge-pagado'}">${v.tipo === 'contado' ? 'CONTADO' : 'PAGADO'}</span>
+                <span class="badge ${v.tipo === 'contado'? 'badge-contado' : 'badge-pagado'}">${v.tipo === 'contado'? 'CONTADO' : 'PAGADO'}</span>
             </div>
             <div class="fecha">Venta: ${v.fecha} • Pago: ${v.fechaPago}</div>
             <div class="detalles">💎 ${v.diamantes} diamantes = <strong>L.${v.precio}</strong></div>
-            ${v.nota ? `<div class="detalles" style="opacity:0.7">📝 ${v.nota}</div>` : ''}
-            <div class="acciones">
-                <button class="btn btn-del" onclick="eliminarVenta(${v.id})">🗑️ Eliminar</button>
-            </div>
         </div>
     `).join('') : '<div class="vacio">Aún no hay ventas completadas</div>';
 }
 
-actualizarStats();
-renderListas();
+// Cargar al inicio
+cargarDatos();
 </script>
 </body>
-  </html>
+</html>
