@@ -195,16 +195,12 @@ async function agregarVenta() {
 
     ventas.unshift(venta);
     
-    try {
-        await fetch(APPS_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors',
-            body: JSON.stringify(venta)
-        });
-        mostrarAlerta('✅ Guardado en Google Sheets');
-    } catch(e) {
-        mostrarAlerta('⚠️ Error guardando online. Se guardó local', true);
-    }
+    fetch(APPS_SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    body: JSON.stringify(venta)
+});
+mostrarAlerta('✅ Enviado a Google Sheets');
 
     guardar();
     document.getElementById('cliente').value = '';
