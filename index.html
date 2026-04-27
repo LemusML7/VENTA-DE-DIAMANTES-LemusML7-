@@ -164,14 +164,14 @@ async function cargarDatos() {
 }
 
 async function agregarVenta() {
-    const cliente = document.getElementById('cliente').value.trim();
-    const telefono = document.getElementById('telefono').value.trim();
+    const cliente = document.getElementById('cliente').value;
+    const telefono = document.getElementById('telefono').value;
     const diamantes = parseInt(document.getElementById('diamantes').value);
     const precio = parseFloat(document.getElementById('precio').value);
     const tipo = document.getElementById('tipo').value;
-    const nota = document.getElementById('nota').value.trim();
+    const nota = document.getElementById('nota').value;
 
-    if (!cliente ||!diamantes ||!precio) {
+    if (!cliente || !diamantes || !precio) {
         mostrarAlerta('⚠️ Llena cliente, diamantes y precio', true);
         return;
     }
@@ -180,35 +180,42 @@ async function agregarVenta() {
     btn.disabled = true;
     btn.textContent = 'Guardando...';
 
-    const fecha = new Date().toLocaleDateString('es-HN');
-    const hora = new Date().toLocaleTimeString('es-HN', {hour:'2-digit',minute:'2-digit'});
-    const id = Date.now();
+    const venta = {
+        id: Date.now(),
+        cliente: cliente,
+        telefono: telefono,
+        diamantes: diamantes,
+        precio: precio,
+        tipo: tipo,
+        nota: nota,
+        fecha: new Date().toLocaleDateString('es-HN'),
+        hora: new Date().toLocaleTimeString('es-HN'),
+        pagado: tipo === 'Contado',
+        fechaPago: tipo === 'Contado' ? new Date().toLocaleDateString('es-HN') : ''
+    };
 
-    // Usando Google Apps Script Web App - más fácil
-    const url = `https://script.google.com/macros/s/AKfycby3-PEGA-TU-DEPLOY-ID/exec`;
-
+    ventas.unshift(venta);
+    
     try {
-        await fetch(url, {
+        await fetch(APPS_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({id,cliente,telefono,diamantes,precio,tipo,nota,fecha,hora,pagado:tipo==='contado',fechaPago:tipo==='contado'?fecha:''})
+            body: JSON.stringify(venta)
         });
-
-        document.getElementById('cliente').value = '';
-        document.getElementById('telefono').value = '';
-        document.getElementById('diamantes').value = '';
-        document.getElementById('precio').value = '';
-        document.getElementById('nota').value = '';
-
         mostrarAlerta('✅ Guardado en Google Sheets');
-        setTimeout(cargarDatos, 1000);
     } catch(e) {
-        mostrarAlerta('⚠️ Error al guardar', true);
+        mostrarAlerta('⚠️ Error guardando online. Se guardó local', true);
     }
 
+    guardar();
+    document.getElementById('cliente').value = '';
+    document.getElementById('telefono').value = '';
+    document.getElementById('diamantes').value = '';
+    document.getElementById('precio').value = '';
+    document.getElementById('nota').value = '';
     btn.disabled = false;
-    btn.textContent = '💾 Guardar Venta';
+    btn.textContent = 'Guardar Venta';
+}
 }
 
 function marcarPagado(id) {
