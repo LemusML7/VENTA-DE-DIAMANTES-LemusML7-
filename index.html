@@ -79,7 +79,6 @@
             <button class="tab" onclick="cambiarTab('historial')">✅ Historial</button>
         </div>
 
-        <!-- NUEVA VENTA -->
         <div id="nueva">
             <div class="card">
                 <h3>Registrar Venta</h3>
@@ -96,24 +95,20 @@
             </div>
         </div>
 
-        <!-- LISTA FIADOS -->
         <div id="lista" class="hidden">
-            <div id="listaFiados"><div class="cargando">Las ventas solo se guardan localmente por ahora</div></div>
+            <div id="listaFiados"><div class="cargando">Cargando...</div></div>
         </div>
 
-        <!-- HISTORIAL -->
         <div id="historial" class="hidden">
-            <div id="listaHistorial"><div class="cargando">Las ventas solo se guardan localmente por ahora</div></div>
+            <div id="listaHistorial"><div class="cargando">Cargando...</div></div>
         </div>
 
         <footer>Sistema Melvin Lemus • Sincronizado con Google Sheets</footer>
     </div>
 
 <script>
-// ⚠️ CONFIGURADO CON TUS DATOS NUEVOS
-const SHEET_ID = '16YG_8QRMy1JPw_3nrD280bI_hjEAYMn6a5lHE3eTF0I';
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxLfNGk9ZHDinCKDlMwO6rSDKEEgk3QCL9ioR-uS8fpg1VhlW-yv4V52CmEz6-krrgO/exec';
-let ventas = JSON.parse(localStorage.getItem('ventas') || '[]');
+let ventas = [];
 
 function mostrarAlerta(msg, error = false) {
     const alerta = document.getElementById('alerta');
@@ -130,14 +125,19 @@ function cambiarTab(tab) {
     document.getElementById('lista').classList.add('hidden');
     document.getElementById('historial').classList.add('hidden');
     document.getElementById(tab).classList.remove('hidden');
-    actualizarStats();
-    renderListas();
 }
 
-function guardar() {
-    localStorage.setItem('ventas', JSON.stringify(ventas));
+async function cargarDatos() {
+  try {
+    document.getElementById('listaFiados').innerHTML = '<div class="cargando">Cargando...</div>';
+    document.getElementById('listaHistorial').innerHTML = '<div class="cargando">Cargando...</div>';
+    const res = await fetch(APPS_SCRIPT_URL);
+    ventas = await res.json();
     actualizarStats();
     renderListas();
+  } catch(e) {
+    mostrarAlerta('⚠️ Error cargando datos', true);
+  }
 }
 
 async function agregarVenta() {
@@ -172,10 +172,6 @@ async function agregarVenta() {
         fechaPago: tipo === 'Contado' ? now.toLocaleDateString('es-HN') : ''
     };
 
-    // Guardar local
-    ventas.unshift(venta);
-    
-    // Enviar a Google Sheets
     fetch(APPS_SCRIPT_URL, {
         method: 'POST',
         mode: 'no-cors',
@@ -183,7 +179,6 @@ async function agregarVenta() {
     });
     
     mostrarAlerta('✅ Venta guardada en Google Sheets');
-    guardar();
     
     document.getElementById('cliente').value = '';
     document.getElementById('telefono').value = '';
@@ -192,24 +187,16 @@ async function agregarVenta() {
     document.getElementById('nota').value = '';
     btn.disabled = false;
     btn.textContent = '💾 Guardar Venta';
+    
+    setTimeout(cargarDatos, 1500);
 }
 
 function marcarPagado(id) {
-    const venta = ventas.find(v => v.id === id);
-    if(venta) {
-        venta.pagado = true;
-        venta.fechaPago = new Date().toLocaleDateString('es-HN');
-        guardar();
-        mostrarAlerta('✅ Marcado como pagado');
-    }
+    mostrarAlerta('⚠️ Para marcar pagado edita directo en Google Sheets por ahora');
 }
 
 function eliminarVenta(id) {
-    if(confirm('¿Eliminar esta venta?')) {
-        ventas = ventas.filter(v => v.id !== id);
-        guardar();
-        mostrarAlerta('✅ Venta eliminada');
-    }
+    mostrarAlerta('⚠️ Para eliminar edita directo en Google Sheets por ahora');
 }
 
 function cobrarWhatsApp(telefono, cliente, diamantes, precio, fecha) {
@@ -222,8 +209,8 @@ function cobrarWhatsApp(telefono, cliente, diamantes, precio, fecha) {
 }
 
 function actualizarStats() {
-    const totalVendido = ventas.reduce((s, v) => s + v.precio, 0);
-    const totalFiado = ventas.filter(v => !v.pagado).reduce((s, v) => s + v.precio, 0);
+    const totalVendido = ventas.reduce((s, v) => s + Number(v.precio || 0), 0);
+    const totalFiado = ventas.filter(v => v.pagado === false || v.pagado === 'FALSE').reduce((s, v) => s + Number(v.precio || 0), 0);
     const clientes = [...new Set(ventas.map(v => v.cliente))].length;
 
     document.getElementById('totalVendido').textContent = `L.${totalVendido.toFixed(0)}`;
@@ -232,8 +219,8 @@ function actualizarStats() {
 }
 
 function renderListas() {
-    const fiados = ventas.filter(v => !v.pagado);
-    const historial = ventas.filter(v => v.pagado);
+    const fiados = ventas.filter(v => v.pagado === false || v.pagado === 'FALSE');
+    const historial = ventas.filter(v => v.pagado === true || v.pagado === 'TRUE');
 
     document.getElementById('listaFiados').innerHTML = fiados.length ? fiados.map(v => `
         <div class="venta fiado">
@@ -245,10 +232,9 @@ function renderListas() {
             <div class="detalles">💎 ${v.diamantes} diamantes = <strong>L.${v.precio}</strong></div>
             ${v.telefono ? `<div class="detalles" style="opacity:0.7">📱 ${v.telefono}</div>` : ''}
             ${v.nota ? `<div class="detalles" style="opacity:0.7">📝 ${v.nota}</div>` : ''}
-            <div class="acciones acciones-3">
+            <div class="acciones">
                 <button class="btn btn-wsp" onclick="cobrarWhatsApp('${v.telefono || ''}', '${v.cliente}', ${v.diamantes}, ${v.precio}, '${v.fecha}')">💬 Cobrar</button>
                 <button class="btn btn-pagar" onclick="marcarPagado(${v.id})">✅ Pagó</button>
-                <button class="btn btn-del" onclick="eliminarVenta(${v.id})">🗑️</button>
             </div>
         </div>
     `).join('') : '<div class="vacio">No hay fiados pendientes 🎉</div>';
@@ -266,8 +252,7 @@ function renderListas() {
 }
 
 // Cargar al inicio
-actualizarStats();
-renderListas();
+cargarDatos();
 </script>
 </body>
-                </html>
+    </html>
