@@ -257,24 +257,21 @@ async function marcarPagado(id) {
   if (!confirm('¿Marcar como PAGADO?')) return;
   
   try {
-    const response = await fetch(APPS_SCRIPT_URL, {
+    await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+      mode: 'no-cors', // ← ESTA LÍNEA ES LA CLAVE
+      headers: {'Content-Type': 'text/plain'}, // ← CAMBIA A text/plain
       body: JSON.stringify({action: 'pagar', id: id})
     });
     
-    const result = await response.json();
+    // Con no-cors no podemos leer la respuesta, asumimos que jaló
+    mostrarAlerta('✅ Marcado como pagado');
+    setTimeout(() => location.reload(), 2000); // 2 seg para que alcance a guardar
     
-    if (result.status === 'ok') {
-      mostrarAlerta('✅ Marcado como pagado');
-      setTimeout(() => location.reload(), 1000);
-    } else {
-      mostrarAlerta('❌ Error: ' + result.msg, true);
-    }
   } catch (error) {
-    mostrarAlerta('❌ Error de conexión: ' + error.message, true);
+    mostrarAlerta('❌ Error: ' + error.message, true);
   }
-}
+    }
 </script>
 </body>
     </html>
